@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}Mastrans{% endblock title %}
+
+{% block content %}
+{% include "nav.html" %}
+{% include "flash.html" %}
+
+<script type="text/javascript">
+
+window.onload = function() {
+
+        if (document.getElementById("mode").value == "1"){
+        document.getElementById("fcl20").style.display = "none";
+        document.getElementById("fcl40").style.display = "none";
+        document.getElementById("weightentry").style.display = "block";
+    }
+    else
+    if (document.getElementById("mode").value == "2"){
+        document.getElementById("fcl20").style.display = "none";
+        document.getElementById("fcl40").style.display = "none";
+        document.getElementById("weightentry").style.display = "block";
+    }
+    else
+    if (document.getElementById("mode").value == "3"){
+        document.getElementById("fcl20").style.display = "block";
+        document.getElementById("fcl40").style.display = "none";
+        document.getElementById("weightentry").style.display = "none";
+    }
+    else
+    if (document.getElementById("mode").value == "4"){
+        document.getElementById("fcl20").style.display = "none";
+        document.getElementById("fcl40").style.display = "block";
+        document.getElementById("weightentry").style.display = "none";
+        addnotes();
+    }
+
+        document.getElementById("fcl20").style.display = "none";
+        document.getElementById("fcl40").style.display = "none";
+        document.getElementById("weightentry").style.display = "block";
+	};
+
+
+function myfunction(){
+
+    if (document.getElementById("mode").value == "1"){
+        document.getElementById("fcl20").style.display = "none";
+        document.getElementById("fcl40").style.display = "none";
+        document.getElementById("weightentry").style.display = "block";
+    }
+    else
+    if (document.getElementById("mode").value == "2"){
+        document.getElementById("fcl20").style.display = "none";
+        document.getElementById("fcl40").style.display = "none";
+        document.getElementById("weightentry").style.display = "block";
+    }
+    else
+    if (document.getElementById("mode").value == "3"){
+        document.getElementById("fcl20").style.display = "block";
+        document.getElementById("fcl40").style.display = "none";
+        document.getElementById("weightentry").style.display = "none";
+    }
+    else
+    if (document.getElementById("mode").value == "4"){
+        document.getElementById("fcl20").style.display = "none";
+        document.getElementById("fcl40").style.display = "block";
+        document.getElementById("weightentry").style.display = "none";
+    }
+    };
+
+
+function portauh(){
+document.getElementById("pdxb").disabled=true
+document.getElementById("pauh").selected=true
+};
+
+function portdxb(){
+document.getElementById("pdxb").disabled=false
+document.getElementById("pdxb").selected=true
+};
+
+function addnotes(text){
+var div = document.getElementById('memo');
+
+if (document.getElementById("warehouse").checked == true)
+{
+var div = document.getElementById('warehousecharges');
+div.innerHTML += text;
+}
+else if (document.getElementById("warehouse").checked == false)
+{
+var div = document.getElementById('warehousecharges');
+div.innerHTML = "";
+}
+};
+
+function covertcbmtocbft(cbm)
+{
+var cbft = cbm * 35.3147
+}
+
+
+
+</script>
+
+<!-- Page Content -->
+<section id="catalog" class="section">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <div>
+                <div class="panel panel-default">
+                <div class="panel-heading">Mastrans</div>
+                 <div class="panel-body">Below are information for the rates
+                         <div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">Information</h4>
+  <p>There are minimum rates applicable</p>
+  <hr>
+  <p class="mb-0">
+      <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Type of Shipment</th>
+      <th scope="col">Minimum Weight in lbs.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="col">Airfreight Shipments</th>
+      <td scope="col">750 lbs</td>
+    </tr>
+    <tr>
+      <th scope="row">LCL Shipments</th>
+      <td>1000 lbs. Gross</td>
+    </tr>
+    <tr>
+      <th scope="row">FCL 1x20 ft Container</th>
+      <td>5000 lbs. Net</td>
+    </tr>
+    <tr>
+      <th scope="row">FCL 1x40 ft container</th>
+      <td>8000 lbs. Net</td>
+    </tr>
+  </tbody>
+</table>
+
+  </p>
+
+
+</div>
+
+                        <div>
+                            <form action="{{url_for('showmastrans')}}" method = "post" class="padding-top-10">
+                                <div class="form-group">
+                                <p><label>Port of Arrival</label>
+                                <label class="radio"><input id="jebel_ali" value="1" type="radio" onchange="portdxb();" checked="checked" name="optradio_1">Jebel Ali</label>
+                                <label class="radio"><input id=abu_dhabi" value="2" type="radio" onchange="portauh();" name="optradio_1">Abu Dhabi</label>
+                                </p>
+
+                                    <p>
+                                    <label>Delivery to</label>
+                                    <select  name="dd_2" class="form-control col-xs-4">
+                                    <option id="pdxb" value="1">Dubai</option>
+                                    <option id="pauh" value="2">Abudhabi</option>
+                                        <option value="3">Sharjah & Ajman</option>
+                                    <option value="4">Northern Emirates</option>
+                                    </select>
+  </p>
+                                    <p>
+
+                                    <label class="form-check-label">Via Warehouse facility <input name="warehouse" type="checkbox" class="form-check-input" id="warehouse" onchange="addnotes('Warehouse Charges');"></label>
+
+
+<p>
+                                    <label>Ship Mode</label>
+
+                                    <select id="mode" name="dd_1" onchange="myfunction()" class="form-control col-xs-4">
+                                    <option value="1">Air Freight</option>
+                                    <option value="2">LCL</option>
+                                    <option value="3">FCL 20'</option>
+                                    <option value="4">FCL 40'</option>
+                                    </select>
+  </p>
+
+                                    <div id="fcl20" display = "none">
+                                     <p>
+                                    <label>Type of FCL 20' Commodity</label>
+                                    <select  name="dd_3" class="form-control col-xs-4">
+                                    <option value="1">Household goods only</option>
+                                    <option value="2">1 Vehicle only</option>
+                                        <option value="3">1 Vehicle + Household goods</option>
+                                    </select>
+                                        </p>
+                                    </div>
+                                    <div id="fcl40" display = "none">
+                                    <p>
+                                    <label>Type of FCL 40' Commodity</label>
+                                    <select  name="dd_4" class="form-control col-xs-4">
+                                    <option value="1">Household goods</option>
+                                        <option value="2">1 Vehicle only</option>
+                                    <option value="3">2 Vehicles only</option>
+                                        <option value="4">1 Vehicle + Household goods</option>
+                                    </select>
+                                        </p>
+                                    </div>
+
+
+
+                                    <div id="weightentry"class="padding-top-10">
+                                        <label>Enter Weight</label>
+                                    <input name="weight" class="form-control" type="text" placeholder="Weight in lbs.">
+                                        </div>
+
+                                    <div class="padding-top-10">
+                                        <label>Enter Offer Code</label>
+                                    <input name="offer" class="form-control" type="text" placeholder="Enter Offer code">
+                                        </div>
+
+                                </div>
+                                            <div class="form-group">
+                <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                <a href="{{url_for('showmastrans')}}">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </a>
+            </div>
+                             </form>
+                        </div>
+                 </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <div id="notes" class="well">
+        <div>Notes:</div>
+        <hr>
+            <div id="memo"> </div>
+            <div id="warehousecharges"></div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.section -->
+{% endblock %}

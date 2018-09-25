@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Mastrans{% endblock title %}
+
+{% block content %}
+{% include "nav.html" %}
+{% include "flash.html" %}
+
+<script type="text/javascript">
+window.onload = function() {
+	document.getElementById("cost").innerHTML ="{{result['cost']}}";
+	document.getElementById("com").innerHTML = "{{result['comment']}}";
+	document.getElementById("port").innerHTML = "{{result['port']}}";
+	document.getElementById("dd_1").innerHTML = "{{result['dd_1']}}";
+	document.getElementById("dd_2").innerHTML = "{{result['dd_2']}}";
+	document.getElementById("offer").innerHTML = "{{result['offer']}}";
+	};
+</script>
+<!-- Page Content -->
+<section id="catalog" class="section">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <div>
+                <div class="panel panel-default">
+                <div class="panel-heading">Mastrans</div>
+                 <div class="panel-body">Below are the rates
+
+
+                        <div>
+                        <p>The cost is <span id="cost"></span></p>
+                         <p>Comments : <span id="com"></span></p>
+                            <p>Port : <span id="port"></span></p>
+                            <p>DropDown : <span id="dd_1"></span></p>
+                            <p>DropDown : <span id="dd_2"></span></p>
+                            <p>Offer :<span id="offer"></span></p>
+
+                        </div>
+
+                 </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.section -->
+{% endblock %}
